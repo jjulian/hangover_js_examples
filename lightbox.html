@@ -37,10 +37,16 @@
   <script>
   $(document).ready(function() {
     $('#overlay').hide();
-    $('#login_form').hide().addClass('lightbox');
+    $('#login_form').hide().addClass('lightbox').append('<a href="#" class="cancel">Cancel</a>');
     $('#login_link').html('<a href="#">Login Here</a>').click(function() {
       $('#overlay,#login_form').show();
     });
+    $('.cancel,#overlay').click(function() {
+      $('#login_form').fadeOut('fast', function() {
+        $('#overlay').fadeOut('fast');
+        });
+    });
+    $(
   });
   </script>
   <div id="overlay"></div>

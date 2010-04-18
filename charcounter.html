@@ -2,17 +2,39 @@
 <html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
   <head>
     <meta content='text/html;charset=UTF-8' http-equiv='content-type' />
+    <script src="jquery-1.4.2.js"></script>
+    <style>
+    .overCount { color: red; }
+    </style>
   </head>
   <body>
     <h1>Edit my Account</h1>
     <form action="/submit" method="post">
       Username: <input type="text" id="username" name="username"/>
+      <span id="username_counter">You have <span>10</span> chars remaining</span>
       <br/>
       Email: <input type="text" id="email" name="email"/>
       <br/>
       Bio: <textarea id="bio" name="bio" cols="50" rows="5"></textarea>
+      <span id="bio_counter">You have <span>50</span> chars remaining</span>
       <br/>
       <input type="submit" value="Save" />
     </form>
+    <script>
+    function keyCounter(max) {
+      return function() {
+        $('#' + $(this).attr('id') + '_counter span').html(max - $(this).val().length);
+        if (max - $(this).val().length < 0) {
+          $('#' + $(this).attr('id') + '_counter').addClass('overCount');
+        } else {
+          $('#' + $(this).attr('id') + '_counter').removeClass('overCount');
+        }
+      };
+    }
+    $(document).ready(function() {
+      $('#bio').keyup(keyCounter(50));
+      $('#username').keyup(keyCounter(10));
+    });
+    </script>
   </body>
 </html>

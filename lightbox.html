@@ -46,7 +46,11 @@
         $('#overlay').fadeOut('fast');
         });
     });
-    $(
+    $(window).keyup(function(e) {
+      if (e.keyCode === 27) {
+        $('#overlay,#login_form').hide();
+      }
+    });
   });
   </script>
   <div id="overlay"></div>
